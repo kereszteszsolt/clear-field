@@ -691,7 +691,7 @@ h2 {
 
 .action-dock {
   position: sticky;
-  bottom: max(var(--space-2), env(safe-area-inset-bottom));
+  top: var(--space-2);
   z-index: 10;
   display: flex;
   align-items: center;
@@ -747,7 +747,7 @@ h2 {
     linear-gradient(90deg, rgb(174 187 208 / 0.025) 1px, transparent 1px),
     rgb(7 11 20 / 0.58);
   background-size: 18px 18px;
-  overscroll-behavior: contain;
+  overscroll-behavior-x: contain;
   scrollbar-color: var(--color-ink-700) transparent;
 }
 
@@ -901,15 +901,139 @@ h2 {
   margin-top: var(--space-6);
 }
 
+.board-tools {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: var(--space-3);
+  margin-bottom: var(--space-3);
+}
+
+.board-tools > .button {
+  flex: 0 0 auto;
+  font-size: 0.82rem;
+}
+
+.game-help {
+  min-width: 0;
+  color: var(--color-ink-300);
+  font-size: 0.82rem;
+}
+
+.game-help summary {
+  min-height: 2.75rem;
+  padding-block: 0.7rem;
+  cursor: pointer;
+}
+
+.game-help p {
+  margin-block: var(--space-2);
+}
+
+[data-cell-size][aria-pressed="true"] {
+  border-color: var(--color-brand-300);
+  color: var(--color-brand-300);
+  background: rgb(45 212 191 / 0.12);
+}
+
 .site-footer {
   display: flex;
   flex-direction: column;
   gap: var(--space-1);
   padding-block: var(--space-6) calc(var(--space-6) + env(safe-area-inset-bottom));
   border-top: 1px solid rgb(174 187 208 / 0.1);
-  color: var(--color-ink-500);
-  font-size: 0.74rem;
+  color: var(--color-ink-300);
+  font-size: 0.8rem;
   text-align: center;
+}
+
+.site-footer p {
+  margin: 0;
+}
+
+.site-footer a {
+  display: inline-block;
+  padding-block: 0.5rem;
+  color: var(--color-brand-300);
+  text-underline-offset: 0.2em;
+}
+
+@media (max-width: 35.999rem) {
+  .site-header {
+    min-height: 4rem;
+  }
+
+  .app-shell {
+    padding-top: var(--space-2);
+    padding-bottom: var(--space-6);
+  }
+
+  .panel--hero {
+    padding-block: var(--space-5);
+  }
+
+  .hero__lead {
+    margin-bottom: var(--space-4);
+  }
+
+  .control-guide {
+    gap: var(--space-2);
+    font-size: 0.86rem;
+  }
+
+  .section-heading {
+    gap: var(--space-2);
+    margin-bottom: var(--space-4);
+  }
+
+  .quick-card {
+    min-height: 5.75rem;
+    padding: var(--space-3);
+  }
+
+  .game-heading .eyebrow {
+    display: none;
+  }
+
+  .game-heading h1 {
+    font-size: 1.6rem;
+  }
+
+  .stats {
+    margin-block: var(--space-3);
+  }
+
+  .stat {
+    padding: var(--space-2) var(--space-3);
+  }
+
+  .stat:last-child {
+    display: none;
+  }
+
+  .is-playing {
+    padding-bottom: calc(5.75rem + env(safe-area-inset-bottom));
+  }
+
+  .is-playing .action-dock {
+    position: fixed;
+    inset: auto max(var(--space-3), env(safe-area-inset-right))
+      max(var(--space-2), env(safe-area-inset-bottom)) max(var(--space-3), env(safe-area-inset-left));
+    margin: 0;
+  }
+
+  .action-dock .segmented__button {
+    min-height: 3rem;
+    font-size: 1rem;
+  }
+
+  .board-viewport {
+    scroll-margin-bottom: 6rem;
+  }
+
+  .tile {
+    scroll-margin-block: 1rem 7rem;
+  }
 }
 
 @media (max-width: 21rem) {
@@ -991,6 +1115,7 @@ h2 {
   .site-footer {
     flex-direction: row;
     justify-content: space-between;
+    gap: var(--space-6);
     text-align: left;
   }
 }

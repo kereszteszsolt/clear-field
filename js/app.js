@@ -17,6 +17,9 @@
   let elapsedSeconds = 0;
   let longPressTimer = null;
   let longPressIndex = null;
+  let pressOrigin = null;
+  let largeCells = false;
+  let resultTimer = null;
   let suppressNextClick = false;
   let suppressResetTimer = null;
   let resizeFrame = null;
@@ -43,6 +46,8 @@
     elements.mineRange = document.querySelector("#mine-range");
     elements.board = document.querySelector("[data-board]");
     elements.boardViewport = document.querySelector("[data-board-viewport]");
+    elements.cellSize = document.querySelector("[data-cell-size]");
+    elements.scrollHint = document.querySelector("#board-scroll-hint");
     elements.boardSize = document.querySelector("[data-board-size]");
     elements.boardSummary = document.querySelector("[data-board-summary]");
     elements.minesLeft = document.querySelector("[data-mines-left]");
@@ -83,9 +88,16 @@
     elements.board.addEventListener("keydown", handleBoardKeyDown);
     elements.board.addEventListener("focusin", handleBoardFocus);
     elements.board.addEventListener("pointerdown", handlePointerDown);
+    elements.board.addEventListener("pointermove", handlePointerMove);
     elements.board.addEventListener("pointerup", cancelLongPress);
     elements.board.addEventListener("pointercancel", cancelLongPress);
     elements.board.addEventListener("pointerleave", cancelLongPress);
+
+    elements.cellSize.addEventListener("click", () => {
+      largeCells = !largeCells;
+      elements.cellSize.setAttribute("aria-pressed", String(largeCells));
+      syncCellSize();
+    });
 
     document.querySelectorAll("[data-tool]").forEach((button) => {
       button.addEventListener("click", () => setActiveTool(button.dataset.tool));
@@ -167,7 +179,7 @@
     const currentValue = parseWholeNumber(elements.customMines.value);
 
     elements.customMines.max = String(maxMines);
-    if (!preserveMineValue || currentValue === null) {
+    if (!preserveMineValue) {
       elements.customMines.value = String(suggestedMines);
     } else if (currentValue > maxMines) {
       elements.customMines.value = String(maxMines);
@@ -202,6 +214,8 @@
   }
 
   function startGame(config) {
+    cancelLongPress();
+    window.clearTimeout(resultTimer);
     currentConfig = { ...config };
     suppressNextClick = false;
     if (suppressResetTimer !== null) window.clearTimeout(suppressResetTimer);
@@ -214,12 +228,14 @@
 
     elements.homeScreen.hidden = true;
     elements.gameScreen.hidden = false;
+    document.body.classList.add("is-playing");
+    elements.boardViewport.scrollLeft = 0;
     closeResultDialog();
     tileElements[0]?.focus({ preventScroll: true });
 
     requestAnimationFrame(() => {
       syncCellSize();
-      window.scrollTo({ top: 0, behavior: "smooth" });
+      window.scrollTo({ top: 0, behavior: "instant" });
     });
   }
 
@@ -230,6 +246,7 @@
 
   function showHome() {
     stopTimer();
+    window.clearTimeout(resultTimer);
     cancelLongPress();
     closeResultDialog();
     game = null;
@@ -237,7 +254,9 @@
     elements.board.replaceChildren();
     elements.gameScreen.hidden = true;
     elements.homeScreen.hidden = false;
-    window.scrollTo({ top: 0, behavior: "smooth" });
+    document.body.classList.remove("is-playing");
+    document.querySelector("[data-quick]").focus({ preventScroll: true });
+    window.scrollTo({ top: 0, behavior: "instant" });
   }
 
   function buildBoard() {
@@ -339,12 +358,13 @@
   }
 
   function handlePointerDown(event) {
-    if (event.pointerType === "mouse" || activeTool === "flag" || !game || game.isOver) return;
+    cancelLongPress();
+    if (event.pointerType === "mouse" || !event.isPrimary || activeTool === "flag" || !game || game.isOver) return;
 
     const tile = event.target.closest(".tile");
     if (!tile) return;
 
-    cancelLongPress();
+    pressOrigin = { x: event.clientX, y: event.clientY, pointerId: event.pointerId };
     longPressIndex = Number(tile.dataset.index);
     longPressTimer = window.setTimeout(() => {
       suppressFollowUpActivation();
@@ -355,10 +375,17 @@
     }, LONG_PRESS_MS);
   }
 
+  function handlePointerMove(event) {
+    if (!pressOrigin || event.pointerId !== pressOrigin.pointerId) return;
+    if (Math.hypot(event.clientX - pressOrigin.x, event.clientY - pressOrigin.y) > 10) {
+      cancelLongPress();
+    }
+  }
+
   function suppressFollowUpActivation() {
     suppressNextClick = true;
     if (suppressResetTimer !== null) window.clearTimeout(suppressResetTimer);
-    suppressResetTimer = window.setTimeout(clearSuppressedActivation, 900);
+    suppressResetTimer = null;
   }
 
   function clearSuppressedActivation() {
@@ -371,6 +398,11 @@
     if (longPressTimer !== null) window.clearTimeout(longPressTimer);
     longPressTimer = null;
     longPressIndex = null;
+    pressOrigin = null;
+    // Keep the release click suppressed even when a finger stays down for a long time.
+    if (suppressNextClick && suppressResetTimer === null) {
+      suppressResetTimer = window.setTimeout(clearSuppressedActivation, 900);
+    }
   }
 
   function performTileAction(index, tool) {
@@ -395,7 +427,7 @@
 
     if (game.isOver) {
       stopTimer();
-      window.setTimeout(showResult, 240);
+      resultTimer = window.setTimeout(showResult, 240);
     }
   }
 
@@ -513,7 +545,7 @@
   }
 
   function showResult() {
-    if (!game) return;
+    if (!game || !game.isOver) return;
 
     const won = game.status === ClearField.STATUS.WON;
     elements.resultDialog.dataset.result = won ? "won" : "lost";
@@ -549,9 +581,17 @@
     const gap = Number.parseFloat(boardStyles.columnGap) || 0;
     const availableWidth = Math.max(240, elements.boardViewport.clientWidth - horizontalPadding);
     const fittedSize = Math.floor((availableWidth - gap * (game.columns - 1)) / game.columns);
-    const cellSize = clamp(fittedSize, 24, 52);
+    const cellSize = clamp(fittedSize, largeCells ? 44 : 28, 52);
 
     elements.board.style.setProperty("--cell-size", `${cellSize}px`);
+    // Ignore subpixel rounding when the board fits against the viewport edge.
+    const overflows = cellSize * game.columns + gap * (game.columns - 1) > availableWidth + 1;
+    elements.scrollHint.hidden = !overflows;
+    if (overflows) {
+      elements.board.setAttribute("aria-describedby", "board-scroll-hint");
+    } else {
+      elements.board.removeAttribute("aria-describedby");
+    }
   }
 
   function showFormError(message) {

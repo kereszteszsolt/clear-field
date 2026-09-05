@@ -4,11 +4,29 @@
 
 ClearField is a mobile-first, independent, fan-made Minesweeper implementation. It is built with plain HTML, Vanilla JavaScript, and Vanilla CSS—there is no build step, external dependency, analytics package, AI library, account system, or persistent score storage.
 
+[**Play ClearField**](https://kereszteszsolt.net/clear-field/) · [Source code](https://github.com/kereszteszsolt/clear-field)
+
+This is a hobby project made for fun, deployed on GitHub Pages so anyone can try it out.
+
+## Screenshots
+
+### Choose a board
+
+![ClearField desktop home screen with quick board sizes and custom game settings](readme-assets/desktop-home.png)
+
+### Play on desktop and mobile
+
+<p align="center">
+  <img src="readme-assets/desktop-game.png" alt="ClearField on desktop with revealed clues and flags" width="680">
+  <img src="readme-assets/mobile-game.png" alt="ClearField on mobile with larger cells and bottom Reveal and Flag controls" width="300">
+</p>
+
 ## Features
 
 - One-tap starts for 5 × 5, 6 × 6, 7 × 7, 8 × 8, 9 × 9, and 10 × 10 boards.
 - Custom square or rectangular boards from 4–20 columns and 4–30 rows.
-- A clear **Reveal / Flag** mode selector designed for mobile use.
+- A clear **Reveal / Flag** mode selector that stays within reach at the bottom of mobile screens.
+- Optional **Larger cells** for easier tapping, with a scrolling hint when a board does not fit.
 - Quick flagging with a long press on touchscreens or a right-click on desktop.
 - A safe first reveal; whenever the board density allows it, the surrounding cells are safe too.
 - A responsive board with horizontal scrolling for larger custom layouts.
@@ -82,3 +100,32 @@ ClearField is an independent, fan-made interpretation of classic Minesweeper gam
 ## License
 
 MIT. See [`LICENSE`](LICENSE) for details.
+
+## Contact
+
+**Project maintainer: Keresztes Zsolt**
+
+| Platform | Link |
+| --- | --- |
+| Website | [kereszteszsolt.hu](https://kereszteszsolt.hu/) |
+| GitHub | [@kereszteszsolt](https://github.com/kereszteszsolt) |
+
+> The website is available in multiple languages: Hungarian (HU), English (EN), Romanian (RO), and German (DE).
+
+## ☕ Ways to support
+
+**Explore ways to support the maintainer and their projects.**
+
+[https://kereszteszsolt.hu/en/ways-to-support/](https://kereszteszsolt.hu/en/ways-to-support/)
+
+<p align="center">
+  <a href="https://buymeacoffee.com/kereszteszsolt"><img src="readme-assets/orange-button.png" alt="Buy Me a Coffee" width="360"></a><br>
+  <strong>Every coffee counts! ☕❤️</strong>
+</p>
+
+---
+
+<p align="center">
+  <strong>Made with ❤️ by <a href="https://kereszteszsolt.hu/">Keresztes Zsolt</a></strong><br>
+  ⭐ Star this repository if you found it helpful!
+</p>
