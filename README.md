@@ -4,7 +4,7 @@
 
 ClearField is a mobile-first, independent, fan-made Minesweeper implementation. It is built with plain HTML, Vanilla JavaScript, and Vanilla CSS—there is no build step, external dependency, analytics package, AI library, account system, or persistent score storage.
 
-[**Play ClearField**](https://kereszteszsolt.net/clear-field/) · [Source code](https://github.com/kereszteszsolt/clear-field)
+[**Play ClearField**](https://kereszteszsolt.net/clear-field/)
 
 This is a hobby project made for fun, deployed on GitHub Pages so anyone can try it out.
 
