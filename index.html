@@ -43,8 +43,8 @@
           <p class="eyebrow">Mobile-first logic game</p>
           <h1 id="home-title">Every clue counts.</h1>
           <p class="hero__lead">
-            Choose a board, then tap to reveal cells or place flags. No sign-up, score
-            tracking, or external libraries.
+            Find the mines without hitting one. Numbers show how many mines touch a cell.
+            Pick a board below — your first reveal is always safe.
           </p>
 
           <div class="control-guide" aria-label="How to play">
@@ -225,10 +225,19 @@
             </div>
           </div>
 
-          <p class="interaction-hint">
-            On mobile, tap with the selected mode. Press and hold to place a flag quickly.
-            On desktop, right-click also toggles a flag.
-          </p>
+          <div class="board-tools">
+            <details class="game-help">
+              <summary>How to play</summary>
+              <p>Numbers count nearby mines, including diagonals. Tap to reveal; switch to Flag
+                or press and hold to mark a mine. Drag to scroll a large board.</p>
+              <p>In Reveal mode, tap a number with all its nearby mines correctly flagged to
+                open the remaining neighbors. On desktop, right-click to flag.</p>
+            </details>
+            <button class="button button--ghost" type="button" data-cell-size aria-pressed="false">
+              Larger cells
+            </button>
+          </div>
+          <p id="board-scroll-hint" class="interaction-hint" hidden>Swipe or scroll sideways to see the rest of the board.</p>
 
           <div id="game-announcement" class="sr-only" aria-live="polite"></div>
 
@@ -240,8 +249,10 @@
     </main>
 
     <footer class="site-footer">
-      <span>ClearField · fan-made Minesweeper implementation</span>
-      <span>Vanilla JavaScript + Vanilla CSS · MIT</span>
+      <p>A hobby project made for fun. Deployed on GitHub Pages so you can
+        <a href="https://kereszteszsolt.net/clear-field/">try it out</a>.</p>
+      <p>Made by <a href="https://kereszteszsolt.hu/">Keresztes Zsolt</a> ·
+        <a href="https://github.com/kereszteszsolt/clear-field">Source code on GitHub</a> · MIT</p>
     </footer>
 
     <dialog id="result-dialog" class="result-dialog" aria-labelledby="result-title">
