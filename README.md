@@ -2,7 +2,7 @@
 
 **Read the clues. Clear the field.**
 
-ClearField is a mobile-first, independent, fan-made Minesweeper implementation. It is built with plain HTML, Vanilla JavaScript, and Vanilla CSS—there is no build step, external dependency, analytics package, AI library, account system, or persistent score storage.
+ClearField is a mobile-first, independent, fan-made Minesweeper game built with HTML, vanilla JavaScript, and CSS. Choose a quick or custom board and play with touch, mouse, or keyboard. It needs no frontend framework, build step, external dependencies, account, or backend; gameplay results are not stored.
 
 [**Play ClearField**](https://kereszteszsolt.net/clear-field/)
 
@@ -33,6 +33,15 @@ This is a hobby project made for fun, deployed on GitHub Pages so anyone can try
 - Keyboard navigation and screen-reader-friendly cell labels.
 - A timer for the current game, with no persistent result or gameplay storage.
 - A cohesive visual style built with reusable CSS design tokens.
+
+## Tech stack
+
+| Area | Technology / approach |
+| --- | --- |
+| Gameplay | Vanilla JavaScript; no frontend framework |
+| Interface | HTML5, CSS3, responsive layouts, reusable CSS design tokens |
+| Interaction | DOM events, touch/mouse input, keyboard navigation, accessible labels |
+| Deployment | Static site; no package installation or build process |
 
 ## Controls
 
@@ -87,11 +96,11 @@ clear-field/
 
 **Description:**
 
-> A mobile-first, fan-made take on the classic Minesweeper puzzle, built with dependency-free Vanilla JavaScript and CSS.
+> Mobile-first Minesweeper game built with vanilla JavaScript, HTML and CSS, featuring custom boards, touch controls and keyboard accessibility.
 
 **Topics:**
 
-`vanilla-javascript`, `vanilla-css`, `html5`, `minesweeper`, `puzzle-game`, `mobile-first`, `responsive-design`, `accessible`, `browser-game`, `open-source`
+`minesweeper`, `vanilla-javascript`, `html5`, `css3`, `browser-game`, `puzzle-game`, `mobile-first`, `responsive-design`, `accessibility`, `touch-controls`, `open-source`
 
 ## About the project
 
