@@ -11,9 +11,9 @@
   --color-ink-300: #aebbd0;
   --color-ink-100: #eef4ff;
 
-  --color-brand-700: #0f766e;
-  --color-brand-500: #2dd4bf;
-  --color-brand-300: #7deade;
+  --color-primary-700: #0f766e;
+  --color-primary-500: #2dd4bf;
+  --color-primary-300: #7deade;
   --color-accent-500: #fbbf24;
   --color-danger-500: #fb7185;
   --color-danger-700: #be123c;
@@ -116,7 +116,7 @@ summary:focus-visible {
   padding: var(--space-3) var(--space-4);
   border-radius: var(--radius-sm);
   color: var(--color-ink-950);
-  background: var(--color-brand-300);
+  background: var(--color-primary-300);
   font-weight: 800;
   transform: translateY(-160%);
 }
@@ -153,7 +153,7 @@ summary:focus-visible {
   padding-top: env(safe-area-inset-top);
 }
 
-.brand {
+.app-identity {
   display: inline-flex;
   align-items: center;
   gap: var(--space-3);
@@ -161,31 +161,31 @@ summary:focus-visible {
   text-decoration: none;
 }
 
-.brand__mark {
+.app-icon {
   width: 2.25rem;
   height: 2.25rem;
   flex: 0 0 auto;
 }
 
-.brand__mark rect {
+.app-icon rect {
   fill: var(--color-ink-800);
   stroke: rgb(125 234 222 / 0.35);
   stroke-width: 1.5;
 }
 
-.brand__mark rect:first-child {
-  fill: var(--color-brand-500);
-  stroke: var(--color-brand-300);
+.app-icon rect:first-child {
+  fill: var(--color-primary-500);
+  stroke: var(--color-primary-300);
 }
 
-.brand__mark path {
+.app-icon path {
   stroke: var(--color-accent-500);
   stroke-width: 3;
   stroke-linecap: round;
   stroke-linejoin: round;
 }
 
-.brand__wordmark {
+.app-name {
   font-size: 1.1rem;
   font-weight: 850;
   letter-spacing: -0.025em;
@@ -247,7 +247,7 @@ summary:focus-visible {
 
 .eyebrow {
   margin: 0 0 var(--space-2);
-  color: var(--color-brand-300);
+  color: var(--color-primary-300);
   font-size: 0.75rem;
   font-weight: 850;
   letter-spacing: 0.13em;
@@ -285,13 +285,14 @@ h2 {
 }
 
 .control-guide {
-  display: grid;
-  gap: var(--space-3);
-  max-width: 47rem;
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-3) var(--space-6);
 }
 
 .control-guide__item {
   display: flex;
+  max-width: 100%;
   align-items: center;
   gap: var(--space-3);
   color: var(--color-ink-300);
@@ -309,7 +310,7 @@ h2 {
   place-items: center;
   border: 1px solid rgb(125 234 222 / 0.35);
   border-radius: 0.65rem;
-  color: var(--color-brand-300);
+  color: var(--color-primary-300);
   background: rgb(45 212 191 / 0.1);
   font-family: var(--font-mono);
   font-weight: 900;
@@ -390,7 +391,7 @@ h2 {
   padding: 0.2rem 0.5rem;
   border-radius: var(--radius-pill);
   color: var(--color-ink-950);
-  background: var(--color-brand-300);
+  background: var(--color-primary-300);
   font-size: 0.62rem;
   font-weight: 900;
   letter-spacing: 0.06em;
@@ -464,7 +465,7 @@ h2 {
 .segmented__option input:checked + span,
 .segmented__button.is-active {
   color: var(--color-ink-950);
-  background: var(--color-brand-300);
+  background: var(--color-primary-300);
 }
 
 .segmented__option input:focus-visible + span {
@@ -497,11 +498,24 @@ h2 {
   background: rgb(7 11 20 / 0.9);
 }
 
-.field small {
+.field small,
+.field-hint {
   display: block;
   margin-top: var(--space-2);
   color: var(--color-ink-500);
   font-size: 0.76rem;
+}
+
+.form-grid--submit {
+  row-gap: var(--space-2);
+}
+
+.form-grid--submit .field-hint {
+  margin-top: 0;
+}
+
+.form-grid--submit > .button {
+  margin-top: var(--space-2);
 }
 
 .form-error {
@@ -544,7 +558,7 @@ h2 {
 
 .button--primary {
   color: var(--color-ink-950);
-  background: var(--color-brand-300);
+  background: var(--color-primary-300);
 }
 
 .button--primary:hover {
@@ -553,7 +567,7 @@ h2 {
 
 .button--secondary {
   border-color: rgb(125 234 222 / 0.32);
-  color: var(--color-brand-300);
+  color: var(--color-primary-300);
   background: rgb(45 212 191 / 0.08);
 }
 
@@ -627,7 +641,7 @@ h2 {
 
 .status-pill[data-state="playing"] {
   border-color: rgb(45 212 191 / 0.32);
-  color: var(--color-brand-300);
+  color: var(--color-primary-300);
   background: rgb(45 212 191 / 0.08);
 }
 
@@ -871,7 +885,7 @@ h2 {
   margin: 0 auto var(--space-4);
   border-radius: 1.15rem;
   color: var(--color-ink-950);
-  background: var(--color-brand-300);
+  background: var(--color-primary-300);
   font-size: 1.7rem;
   font-weight: 950;
   transform: rotate(-4deg);
@@ -931,8 +945,8 @@ h2 {
 }
 
 [data-cell-size][aria-pressed="true"] {
-  border-color: var(--color-brand-300);
-  color: var(--color-brand-300);
+  border-color: var(--color-primary-300);
+  color: var(--color-primary-300);
   background: rgb(45 212 191 / 0.12);
 }
 
@@ -954,8 +968,29 @@ h2 {
 .site-footer a {
   display: inline-block;
   padding-block: 0.5rem;
-  color: var(--color-brand-300);
+  color: var(--color-primary-300);
   text-underline-offset: 0.2em;
+}
+
+.site-footer .author-attribution {
+  width: 100%;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: var(--space-2);
+  text-align: left;
+}
+
+.site-footer .copyright-line {
+  white-space: nowrap;
+}
+
+.site-footer .author-websites {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4em;
+  margin-left: auto;
+  white-space: nowrap;
 }
 
 @media (max-width: 35.999rem) {
@@ -1085,6 +1120,17 @@ h2 {
     align-items: end;
   }
 
+  .form-grid--submit .field-hint {
+    grid-column: 1;
+    grid-row: 2;
+  }
+
+  .form-grid--submit > .button {
+    grid-column: 2;
+    grid-row: 1;
+    margin-top: 0;
+  }
+
   .stats {
     grid-template-columns: 0.8fr 0.8fr 1.4fr;
   }
@@ -1125,10 +1171,6 @@ h2 {
     gap: var(--space-6);
   }
 
-  .control-guide {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-  }
-
   .quick-grid {
     grid-template-columns: repeat(6, minmax(0, 1fr));
   }
@@ -1152,3 +1194,8 @@ h2 {
     animation-iteration-count: 1 !important;
   }
 }
+
+.site-header { flex-wrap: wrap; }
+.site-header__tagline { margin-left: auto; }
+.site-footer .author-attribution a { padding: 0; }
+@media (max-width: 380px) { .site-header__tagline { display: none; } #about-button { margin-left: auto; } }

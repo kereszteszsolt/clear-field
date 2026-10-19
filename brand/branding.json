@@ -1,0 +1,18 @@
+{
+  "appName": "ClearField",
+  "appTagline": "Read the clues. Clear the field.",
+  "appDescription": "ClearField — a mobile-first, fan-made Minesweeper game built with Vanilla JavaScript and CSS.",
+  "appWebsite": "https://kereszteszsolt.net/clear-field/",
+  "appGithubUrl": "https://github.com/kereszteszsolt/clear-field",
+  "appFavicon": "assets/favicon.svg",
+  "appIcon": "assets/favicon.svg",
+  "appPoster": "assets/clear-field-poster.svg",
+  "authorName": "Keresztes Zsolt",
+  "authorWebsite": "https://kereszteszsolt.hu",
+  "authorWebsiteLanguages": ["hu", "en", "ro", "de"],
+  "authorGithub": "https://github.com/kereszteszsolt",
+  "authorWaysToSupportUrl": "https://kereszteszsolt.hu/ways-to-support",
+  "authorBuyMeACoffeeUrl": "https://buymeacoffee.com/kereszteszsolt",
+  "supportRemarkText": "Support is voluntary and does not create any obligation, priority service, special access or other consideration.\nThank you for your attention, and also if you support my work in any way!",
+  "extraWebsite": "https://kereszteszsolt.net"
+}

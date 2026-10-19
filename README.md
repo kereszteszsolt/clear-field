@@ -54,24 +54,24 @@ This is a hobby project made for fun, deployed on GitHub Pages so anyone can try
 
 ## Run locally
 
-ClearField is a static project, so no installation or build command is required. You can open `index.html` directly, although a local web server provides the most reliable browser behavior.
+ClearField is a static project, so no installation or build command is required. Opening `index.html` directly supports gameplay, the complete default About dialog and the MIT attribution. Serve the project folder locally to apply editable About metadata from `brand/branding.json`.
 
 ### Python
 
 Run the following command from the folder that contains `index.html`:
 
 ```bash
-python3 -m http.server 8080
+python3 -m http.server 8080 --bind 127.0.0.1
 ```
 
 On Windows, either of these commands may be available:
 
 ```powershell
-py -m http.server 8080
+py -m http.server 8080 --bind 127.0.0.1
 ```
 
 ```powershell
-python -m http.server 8080
+python -m http.server 8080 --bind 127.0.0.1
 ```
 
 Then open `http://localhost:8080` in your browser. Stop the server with `Ctrl + C`.
@@ -81,8 +81,13 @@ Then open `http://localhost:8080` in your browser. Stop the server with `Ctrl + 
 ```text
 clear-field/
 ├── assets/favicon.svg
-├── css/styles.css
+├── brand/                  # Editable JSON catalog and original artwork
+├── css/
+│   ├── styles.css
+│   └── about.css
 ├── js/
+│   ├── app-info.js
+│   ├── about.js
 │   ├── app.js
 │   └── game.js
 ├── index.html
@@ -101,6 +106,10 @@ clear-field/
 **Topics:**
 
 `minesweeper`, `vanilla-javascript`, `html5`, `css3`, `browser-game`, `puzzle-game`, `mobile-first`, `responsive-design`, `accessibility`, `touch-controls`, `open-source`
+
+## About and attribution
+
+The header opens a native About dialog with a poster, description, project/author links, support actions and voluntary-support notice. Served pages load this content from the root catalog; a complete default dialog remains available when opening the HTML directly or if metadata cannot load. Tooltips expose descriptions, full URLs and the configured website languages. The dialog supports keyboard navigation, Escape, close-button and backdrop dismissal while preserving the current board. The footer shows the current year, configured author and MIT license on the left, with `authorWebsite` and the optional footer-only `extraWebsite` grouped on the right. Website links underline on hover, and the support notice preserves configured line breaks. Application code and styles use functional names; root metadata and legal license remain separate.
 
 ## About the project
 
@@ -138,3 +147,7 @@ MIT. See [`LICENSE`](LICENSE) for details.
   <strong>Made with ❤️ by <a href="https://kereszteszsolt.hu/">Keresztes Zsolt</a></strong><br>
   ⭐ Star this repository if you found it helpful!
 </p>
+
+### About verification — 2026-10-19
+
+Local Chromium checks at widths from 320px to 1440px covered the complete About dialog over HTTP and as a local file, link tooltips, keyboard/close/backdrop dismissal, focus restoration, viewport bounds and preservation of the current board. Focused checks also covered custom square/rectangle starts, desktop button and instruction alignment, footer domain alignment and hover styling, optional website metadata, failed metadata loading and separate support-sentence lines. The existing keyboard shortcut handler ignores input while a dialog is open. No framework, build step or automated game test suite was introduced. The original MIT license and artwork remain unchanged; hosted deployment was not performed.

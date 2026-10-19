@@ -17,6 +17,8 @@
     <link rel="icon" href="assets/favicon.svg" type="image/svg+xml" />
     <link rel="manifest" href="manifest.webmanifest" />
     <link rel="stylesheet" href="css/styles.css" />
+    <link rel="stylesheet" href="css/about.css" />
+    <script src="js/about.js" defer></script>
     <script src="js/game.js" defer></script>
     <script src="js/app.js" defer></script>
     <title>ClearField</title>
@@ -25,16 +27,17 @@
     <a class="skip-link" href="#main-content">Skip to content</a>
 
     <header class="site-header">
-      <a class="brand" href="#" data-home-link aria-label="ClearField home">
-        <svg class="brand__mark" viewBox="0 0 48 48" aria-hidden="true">
+      <a class="app-identity" href="#" data-home-link aria-label="ClearField home">
+        <svg class="app-icon" viewBox="0 0 48 48" aria-hidden="true">
           <rect x="3" y="3" width="18" height="18" rx="5"></rect>
           <rect x="27" y="3" width="18" height="18" rx="5"></rect>
           <rect x="3" y="27" width="18" height="18" rx="5"></rect>
           <path d="M31 39V28m0 1h9l-2.6 3.4L40 36h-9" fill="none"></path>
         </svg>
-        <span class="brand__wordmark">ClearField</span>
+        <span class="app-name">ClearField</span>
       </a>
       <span class="site-header__tagline">Read the clues. Clear the field.</span>
+      <button class="button button--ghost" id="about-button" type="button" aria-haspopup="dialog">About</button>
     </header>
 
     <main id="main-content" class="app-shell">
@@ -145,9 +148,9 @@
             <div class="form-grid form-grid--submit">
               <label class="field" for="custom-mines">
                 <span>Number of mines</span>
-                <input id="custom-mines" name="mines" type="number" min="1" max="32" step="1" value="16" inputmode="numeric" />
-                <small id="mine-range">Suggested: 16 · maximum: 32</small>
+                <input id="custom-mines" name="mines" type="number" min="1" max="32" step="1" value="16" inputmode="numeric" aria-describedby="mine-range" />
               </label>
+              <small id="mine-range" class="field-hint">Suggested: 16 · maximum: 32</small>
 
               <button class="button button--primary button--large" type="submit">
                 Start custom game
@@ -248,12 +251,43 @@
       </section>
     </main>
 
-    <footer class="site-footer">
-      <p>A hobby project made for fun. Deployed on GitHub Pages so you can
-        <a href="https://kereszteszsolt.net/clear-field/">try it out</a>.</p>
-      <p>Made by <a href="https://kereszteszsolt.hu/">Keresztes Zsolt</a> ·
-        <a href="https://github.com/kereszteszsolt/clear-field">Source code on GitHub</a> · MIT</p>
+    <footer class="site-footer" id="app-attribution">
+      <div class="author-attribution">
+        <span class="copyright-line">© <span data-current-year>2026</span> Keresztes Zsolt,
+          <a href="https://opensource.org/license/mit" target="_blank" rel="noopener noreferrer">MIT</a></span>
+        <span class="author-websites">
+          <a class="author-website" href="https://kereszteszsolt.hu" target="_blank" rel="noopener noreferrer">kereszteszsolt.hu</a>
+          <span aria-hidden="true">|</span>
+          <a class="extra-website" href="https://kereszteszsolt.net" target="_blank" rel="noopener noreferrer">kereszteszsolt.net</a>
+        </span>
+      </div>
     </footer>
+    <dialog id="about-dialog" class="about-dialog" aria-labelledby="about-title" aria-describedby="about-description">
+      <div class="about-heading"><h2 id="about-title">About ClearField</h2><button class="about-close" type="button" aria-label="Close about" autofocus>×</button></div>
+      <div id="about-content">
+        <img class="about-poster" src="brand/assets/clear-field-poster.svg" alt="ClearField project poster" width="780" height="480" />
+        <p id="about-description" class="about-description">ClearField — a mobile-first, fan-made Minesweeper game built with Vanilla JavaScript and CSS.</p>
+        <nav class="about-links" aria-label="Project and author links">
+          <a class="about-link" href="https://kereszteszsolt.hu" target="_blank" rel="noopener noreferrer" data-about-link="globe" data-description="About Keresztes Zsolt, projects and contact. Available in hu | en | ro | de.">kereszteszsolt.hu</a>
+          <a class="about-link" href="https://kereszteszsolt.net/clear-field/" target="_blank" rel="noopener noreferrer" data-about-link="globe" data-description="Visit the project website.">Project website</a>
+          <a class="about-link" href="https://github.com/kereszteszsolt/clear-field" target="_blank" rel="noopener noreferrer" data-about-link="code" data-description="Source code for ClearField.">Source</a>
+          <a class="about-link" href="https://github.com/kereszteszsolt" target="_blank" rel="noopener noreferrer" data-about-link="user" data-description="Explore Keresztes Zsolt's projects.">GitHub profile</a>
+        </nav>
+        <nav class="about-links about-support-links" aria-label="Support the author">
+          <a class="about-link coffee-link" href="https://buymeacoffee.com/kereszteszsolt" target="_blank" rel="noopener noreferrer" data-about-link="coffee" data-description="Support Keresztes Zsolt on Buy Me a Coffee.">Buy me a Coffee</a>
+          <a class="about-link" href="https://kereszteszsolt.hu/ways-to-support" target="_blank" rel="noopener noreferrer" data-about-link="heart" data-description="Ways to support Keresztes Zsolt's work.">Ways to support</a>
+        </nav>
+        <div class="about-support-note" role="note">
+          <span data-about-icon="info" aria-hidden="true"></span>
+          <p>Support is voluntary and does not create any obligation, priority service, special access or other consideration.
+            Thank you for your attention, and also if you support my work in any way!</p>
+        </div>
+        <div class="author-attribution">
+          <span class="copyright-line">© <span data-current-year>2026</span> Keresztes Zsolt,
+            <a href="https://opensource.org/license/mit" target="_blank" rel="noopener noreferrer">MIT</a></span>
+        </div>
+      </div>
+    </dialog>
 
     <dialog id="result-dialog" class="result-dialog" aria-labelledby="result-title">
       <div class="result-dialog__mark" data-result-mark aria-hidden="true">✓</div>

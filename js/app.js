@@ -504,6 +504,7 @@
   }
 
   function handleKeyboardShortcut(event) {
+    if (document.querySelector("dialog[open]")) return;
     if (elements.gameScreen.hidden || event.altKey || event.ctrlKey || event.metaKey) return;
     if (event.target.matches("input, textarea, select")) return;
 
